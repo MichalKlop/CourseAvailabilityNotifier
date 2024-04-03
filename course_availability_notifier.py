@@ -14,29 +14,6 @@ import smtplib
 import re
 import datetime
 
-"""
-INSTRUCTIONS
-Step 1: Edit email configurations
-    sending_address is the email you will be sending the notification from
-        IMPORTANT: THIS MUST BE A GMAIL ACCOUNT
-    sending_password is the password to the gmail account of sending_address
-        NOTE: Password is used to login to this account and send the email. 
-              Secondary/Burner account recommended
-              Use personal account information at your own risk
-    recieving_address is the email address of the account you want to notify
-        UO student email recommended but any email account will work
-NOTE: Account information is NOT checked so please ensure this information before continuing. 
-
-Step 2: Run this file and input course information when prompted.
-
-NOTE: In order for this program to continuously check for available seats, you must have internet access, 
-      keep your computer running, and prevent it from going to sleep. 
-      
-      Once the program is running, the only way to stop it is to force close the console. 
-      Keybindings to force the program to stop:
-          Windows/Linux: Ctrl+C    Mac: Command+C
-"""
-
 # Email configurations
 sending_address = "sending_address@gmail.com"  # Replace with your email address
 sending_password = "sending_password"  # Replace with your email password
@@ -115,7 +92,7 @@ def main():
             if avail_value > 0:
                 print("Availability increased to", avail_value)
             else:
-                print(f"({time.asctime()}) No change in availability.")
+                print(f"({time.asctime()}) No change in availability. ({avail_value} seats available)")
 
             return avail_value
 

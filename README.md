@@ -28,7 +28,12 @@ Before using the program, ensure you have the following:
 
 ## Instructions
 
-1. **Edit Email Configurations**:
+1. **Download Files**
+   - At the top of [this repository](https://github.com/MichalKlop/CourseAvailabilityNotifier), click the green button at the top right that says `<> Code`.
+   - Click `Download ZIP` at the bottom of the dropdown and save this file to your computer.
+   - Extract the files making sure they are all in the same directory.
+
+2. **Edit Email Configurations**:
     - Open the Python file (`course_availability_notifier.py`).
     - Locate the following variables starting at line 17:
         - `sending_address`: Your Gmail address used for sending notifications.
@@ -39,7 +44,7 @@ Before using the program, ensure you have the following:
             - UO student email is recommended, but any valid email address will work.
     - **CAUTION**: Account information is not checked, so ensure its accuracy before proceeding.
 
-2. **Run the Program**:
+3. **Run the Program**:
     - Method 1 (Terminal/Command Prompt)
       - Open a terminal or command prompt.
       - Navigate to the directory containing `course_availability_notifier.py`.

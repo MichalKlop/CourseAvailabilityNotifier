@@ -7,12 +7,39 @@ SUMMER TERMS NOT SUPPORTED (Fall, Winter, Spring ONLY)
 For personal/private use ONLY
 """
 
-import requests
-from bs4 import BeautifulSoup
-import time
-import smtplib
-import re
-import datetime
+import subprocess
+import sys
+
+
+def install_dependencies():
+    try:
+        import requests
+        from bs4 import BeautifulSoup
+        import time
+        import smtplib
+        import re
+        import datetime
+    except ImportError:
+        print("Some dependencies are missing. Installing them now...")
+
+        # Install pip if not already installed
+        try:
+            subprocess.check_call([sys.executable, "-m", "ensurepip"])
+            print("pip installed successfully.")
+        except subprocess.CalledProcessError:
+            print("Error installing pip. Please install it manually.")
+
+        # Install required packages
+        try:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
+            print("Dependencies installed successfully.")
+        except subprocess.CalledProcessError:
+            print(
+                "Error installing dependencies. Please install them manually using 'pip install -r requirements.txt'.")
+            sys.exit(1)
+
+
+install_dependencies()
 
 # Email configurations
 sending_address = "sending_address@gmail.com"  # Replace with your email address
@@ -29,13 +56,16 @@ def check_url(url: str) -> bool:
     cur_year = date[:4]
     cur_month = int(date[5:7])
     # If within dates for fall registration
-    if cur_month in range(5, 11) and re.search(f"(https://)|(duckweb).uoregon.edu/duckweb/hwskdhnt.p_viewdetl\?term={cur_year}01&crn=\d{'{5}'}", url):
+    if cur_month in range(5, 11) and re.search(
+            f"(https://)|(duckweb).uoregon.edu/duckweb/hwskdhnt.p_viewdetl\?term={cur_year}01&crn=\d{'{5}'}", url):
         return True
     # If within dates for winter registration
-    elif (cur_month in range(10, 13) or cur_month == 1) and re.search(f"(https://)|(duckweb).uoregon.edu/duckweb/hwskdhnt.p_viewdetl\?term={cur_year}02&crn=\d{'{5}'}", url):
+    elif (cur_month in range(10, 13) or cur_month == 1) and re.search(
+            f"(https://)|(duckweb).uoregon.edu/duckweb/hwskdhnt.p_viewdetl\?term={cur_year}02&crn=\d{'{5}'}", url):
         return True
     # If within dates for spring registration
-    elif cur_month in range(2, 5) and re.search(f"(https://)|(duckweb).uoregon.edu/duckweb/hwskdhnt.p_viewdetl\?term={cur_year}03&crn=\d{'{5}'}", url):
+    elif cur_month in range(2, 5) and re.search(
+            f"(https://)|(duckweb).uoregon.edu/duckweb/hwskdhnt.p_viewdetl\?term={cur_year}03&crn=\d{'{5}'}", url):
         return True
     # Not currently supporting Summer classes...
     return False
@@ -68,7 +98,8 @@ def main():
 
     # Get the course title
     try:
-        title = soup.find('td', attrs={'colspan': '6', 'class': 'dddead', 'width': '323'}).find('b').text.strip().replace("\xa0\xa0", "")
+        title = soup.find('td', attrs={'colspan': '6', 'class': 'dddead', 'width': '323'}).find(
+            'b').text.strip().replace("\xa0\xa0", "")
     except Exception as e:
         print("Error: Invalid URL or could not find course title. Please try again.")
         main()

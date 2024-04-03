@@ -86,4 +86,6 @@ Change the 300 to the desired monitoring frequency (in seconds).
 
 Use this program responsibly and at your own risk. Ensure that your Gmail account information is secure. 
 
+This program is unofficial and is not affiliated with the University of Oregon in any way.
+
 ---
